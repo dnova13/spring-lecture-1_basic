@@ -10,7 +10,16 @@ import java.util.Optional;
 
 // 서비스는 비지니스에 맞도록 의존적으로 개발.
 public class MemberService {
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+//    private final MemberRepository memberRepository = new MemoryMemberRepository();
+
+    /**
+     * 회원 리포지토리의 코드가
+     * 회원 서비스 코드를 DI 가능하게 변경한다.
+     */
+    private final MemberRepository memberRepository;
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     /**
      * 회원가입
