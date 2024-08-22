@@ -3,12 +3,16 @@ package hello.hellospring.service;
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 
+
 // 서비스는 비지니스에 맞도록 의존적으로 개발.
+@Service
 public class MemberService {
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();
 
@@ -17,6 +21,7 @@ public class MemberService {
      * 회원 서비스 코드를 DI 가능하게 변경한다.
      */
     private final MemberRepository memberRepository;
+    @Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
