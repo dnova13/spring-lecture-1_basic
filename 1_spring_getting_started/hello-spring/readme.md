@@ -9,3 +9,8 @@
 ```
 ./gradlew build
 ```
+
+### gradle dependencies sync.
+```
+./gradlew dependencies
+```
