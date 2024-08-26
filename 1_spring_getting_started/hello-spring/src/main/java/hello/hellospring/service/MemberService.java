@@ -8,10 +8,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.transaction.annotation.Transactional;
 
 
 
 // 서비스는 비지니스에 맞도록 의존적으로 개발.
+// jpa 사용시 JPA를 통한 모든 데이터 변경은 트랜잭션 안에서 실행해야 한다.
+// @Transactional 설정해야된다.
+@Transactional
 public class MemberService {
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();
 
