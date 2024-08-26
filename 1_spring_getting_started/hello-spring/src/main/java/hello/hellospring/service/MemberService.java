@@ -61,4 +61,34 @@ public class MemberService {
     public Optional<Member> findOne(Long memberId) {
         return memberRepository.findById(memberId);
     }
+
+
+    /**
+     * 회원가입 시간 측정을 위한 메소드 예제
+     */
+    public Long joinToTime(Member member) {
+        long start = System.currentTimeMillis();
+        try {
+            validateDuplicateMember(member); //중복 회원 검증
+            memberRepository.save(member);
+            return member.getId();
+        } finally {
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
+            System.out.println("join " + timeMs + "ms");
+        }
+    }
+    /**
+     * 전체 회원 조회 시간 측정을 위한 메소드 예제
+     */
+    public List<Member> findMembersToTime() {
+        long start = System.currentTimeMillis();
+        try {
+            return memberRepository.findAll();
+        } finally {
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
+            System.out.println("findMembers " + timeMs + "ms");
+        }
+    }
 }
