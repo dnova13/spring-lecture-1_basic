@@ -1,54 +1,27 @@
 package hello.hellospring;
 
 import hello.hellospring.repository.*;
-//import hello.hellospring.repository.JdbcTemplateMemberRepository;
-
 import hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 
-import jakarta.persistence.EntityManager;
-import javax.sql.DataSource;
-
-
+/**
+ * 스프링 데이터 JPA 회원 리포지토리를 사용하도록 스프링 설정 변경
+ ** 스프링 데이터 JPA가 SpringDataJpaMemberRepository 를 스프링 빈으로 자동 등록해준다.
+ * */
 @Configuration
 public class SpringConfig {
-
-    private final DataSource dataSource;
-    private final EntityManager em;
+    private final MemberRepository memberRepository;
 
     @Autowired
-    public SpringConfig(DataSource dataSource, EntityManager em) {
-        this.dataSource = dataSource;
-        this.em = em;
+    public SpringConfig(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 
-    /**
-     * memberService 스프링 빈에 등록
-     * <p>
-     * public MemberService(MemberRepository memberRepository) 에서
-     * 여기서 등록된 스프링 빈을 위의 메소드 MemberService 넣어줌
-     */
     @Bean
     public MemberService memberService() {
-        return new MemberService(memberRepository());
-    }
-
-    /**
-     * memberRepository 스프링 빈에 등록
-     * <p>
-     * 등록된 스프링 빈을 MemoryMemberRepository 객체에 넣어줌.
-     */
-    @Bean
-    public MemberRepository memberRepository() {
-        // return new MemoryMemberRepository();
-//        return new JdbcMemberRepository(dataSource);
-//        return new JdbcTemplateMemberRepository(dataSource); // JdbcTemplateMemberRepository 빈으로 하여 주입
-        return new JpaMemberRepository(em);
+        return new MemberService(memberRepository);
     }
 }
-
-
-
