@@ -52,7 +52,7 @@ class MemoryMemberRepositoryTest {
 
         //when
         // 예제를 위해 일부러 spring1 -> spring2 로 찾게하여 에러냄
-        Member result = repository.findByName("spring2").get();
+        Member result = repository.findByName("spring1").get();
         System.out.println("result = " + result);
 
         //then
