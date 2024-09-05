@@ -19,6 +19,7 @@ public class HelloController {
         return "hello-template";
     }
 
+    // rest api
     @GetMapping("hello-string")
     @ResponseBody
     public String helloString(@RequestParam("name") String name) {
@@ -26,6 +27,7 @@ public class HelloController {
     }
 
 
+    // rest api
     @GetMapping("hello-api")
     @ResponseBody
     public Hello helloApi(@RequestParam("name") String name) {

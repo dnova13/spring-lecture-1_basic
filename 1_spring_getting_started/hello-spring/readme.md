@@ -1,3 +1,7 @@
+### 개발 환경
+- java version 17
+- spring boot version 3.x.x
+
 
 ### gradle spring boot 실행
 ```
@@ -26,4 +30,11 @@
 # window
 ./h2.bat
 
+```
+
+
+### swagger 주소
+```
+{host}/swagger-ui/index.html
+{host}/swagger-ui
 ```
