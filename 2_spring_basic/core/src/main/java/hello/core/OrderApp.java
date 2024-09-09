@@ -18,6 +18,7 @@ public class OrderApp {
 //        MemberService memberService = appConfig.memberService();
 //        OrderService orderService = appConfig.orderService();
 
+        // AppConfig 에서 어노테이션으로 설정한 스프링 컨테이너 직접사용
         ApplicationContext applicationContext = new
                 AnnotationConfigApplicationContext(AppConfig.class);
 
