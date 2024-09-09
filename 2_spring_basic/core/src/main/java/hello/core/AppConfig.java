@@ -11,28 +11,37 @@ import hello.core.order.OrderService;
 import hello.core.order.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-@Configurable
+@Configuration
 public class AppConfig {
 
 
     //  MemberService를 MemberServiceImpl로 쓸거야
     @Bean
     public MemberService memberService() {
+        //1번
+        System.out.println("call AppConfig.memberService");
         return new MemberServiceImpl(memberRepository());
     }
 
     // MemberRepository 역할을 주기 위해 리팩토링 추가
     // MemberRepository는 MemoryMemberRepository로 쓸거야 라고 추가
-    @Bean
-    private MemberRepository memberRepository() {
-        return new MemoryMemberRepository();
-    }
+
 
     // OrderService는 나의 애플리케이션에서 결정한 memberRepository를 가져오고 discountPolicy를 가져올거야
     @Bean
     public OrderService orderService() {
+        //1번
+        System.out.println("call AppConfig.orderService");
         return new OrderServiceImpl(memberRepository(), discountPolicy());
+    }
+
+    @Bean
+    public MemberRepository memberRepository() {
+        //2번? 3번?
+        System.out.println("call AppConfig.memberRepository");
+        return new MemoryMemberRepository();
     }
 
     // DiscountPolicy 역할을 주기위해 리팩토링 코드 추가
