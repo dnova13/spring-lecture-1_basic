@@ -1,5 +1,9 @@
 package hello.core.member;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class MemberServiceImpl implements MemberService {
     
 //    dip ocp 위반
@@ -12,6 +16,7 @@ public class MemberServiceImpl implements MemberService {
     
     // 그래서 생정자 생성
     // 생성자를 통해 어떤 구현 객체가 들어올지(주입될지)는 알 수 없다
+    @Autowired
     public MemberServiceImpl(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
