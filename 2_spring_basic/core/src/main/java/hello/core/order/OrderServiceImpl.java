@@ -28,22 +28,22 @@ public class OrderServiceImpl implements OrderService {
 
     // @Qualifier 예시
     // 파라미터 @Qualifier("mainDiscountPolicy") 혹은 @Qualifier("fixDiscountPolicy") 식으로 추가하여 적어준다.
-    @Autowired
+   /* @Autowired
     public OrderServiceImpl(MemberRepository memberRepository,
                             @Qualifier("mainDiscountPolicy") DiscountPolicy
                                     discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
-    }
+    }*/
 
     // 생성자 생성하여 의존성 주입
     // lombok 에 의한 자동 생성자 주입으로 인한 생성자 주입 주석처리
-    /*@Autowired
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         System.out.println("1. OrderServiceImpl.OrderServiceImpl");
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
-    }*/
+    }
 
 
 
