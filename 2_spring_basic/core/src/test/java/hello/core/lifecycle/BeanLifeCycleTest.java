@@ -19,8 +19,9 @@ public class BeanLifeCycleTest {
     @Configuration
     static class LifeCycleConfig {
 
-        @Bean
-        // 해당 빈 이용 : 생명주기 주목.
+
+        // 추론 기능을 사용하기 싫으면 destroyMethod= ""처럼 빈 공백을 지정하면 된다.
+        @Bean(initMethod = "init", destroyMethod = "close")
         public NetworkClient networkClient() {
             NetworkClient networkClient = new NetworkClient();
             networkClient.setUrl("http://hello-spring.dev");
