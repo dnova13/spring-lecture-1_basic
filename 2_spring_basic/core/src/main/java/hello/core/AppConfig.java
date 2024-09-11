@@ -34,11 +34,11 @@ public class AppConfig {
     public OrderService orderService() {
         //1번
         System.out.println("call AppConfig.orderService");
-//        return new OrderServiceImpl(memberRepository(), discountPolicy());
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
 
         // 수정자 주입으로 인한 null 처리
         // OrderServiceImpl의 생성자가 필요하게끔 되어있어서 null return
-        return null;
+        // return null;
     }
 
     @Bean
