@@ -6,10 +6,12 @@ import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+//@RequiredArgsConstructor // 룸백 적용
 public class OrderServiceImpl implements OrderService {
 
 //    private final MemberRepository memberRepository = new MemoryMemberRepository(); // 회원
@@ -19,9 +21,19 @@ public class OrderServiceImpl implements OrderService {
     // private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
 
     // 인터페이스에만 의존하도록 아래와 같이 변경
+    // 롬북 적용 후 필드에 final이 붙은거만 모아서 자동으로 만들어줌.
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
+
+    // 생성자 생성하여 의존성 주입
+    // lombok 에 의한 자동 생성자 주입으로 인한 생성자 주입 주석처리
+    @Autowired
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        System.out.println("1. OrderServiceImpl.OrderServiceImpl");
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
     // 수정자 주입 예시를 위해 이전 코드 final 지움.
 //    private MemberRepository memberRepository;
@@ -31,13 +43,7 @@ public class OrderServiceImpl implements OrderService {
 //    @Autowired private MemberRepository memberRepository;
 //    @Autowired private DiscountPolicy discountPolicy;
 
-    // 생성자 생성하여 의존성 주입
-    @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        System.out.println("1. OrderServiceImpl.OrderServiceImpl");
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
-    }
+
     
     
 /*
