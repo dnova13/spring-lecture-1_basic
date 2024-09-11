@@ -8,6 +8,7 @@ import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -25,15 +26,27 @@ public class OrderServiceImpl implements OrderService {
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
+    // @Qualifier 예시
+    // 파라미터 @Qualifier("mainDiscountPolicy") 혹은 @Qualifier("fixDiscountPolicy") 식으로 추가하여 적어준다.
+    @Autowired
+    public OrderServiceImpl(MemberRepository memberRepository,
+                            @Qualifier("mainDiscountPolicy") DiscountPolicy
+                                    discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
     // 생성자 생성하여 의존성 주입
     // lombok 에 의한 자동 생성자 주입으로 인한 생성자 주입 주석처리
-    @Autowired
+    /*@Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         System.out.println("1. OrderServiceImpl.OrderServiceImpl");
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
-    }
+    }*/
+
+
+
 
     // 수정자 주입 예시를 위해 이전 코드 final 지움.
 //    private MemberRepository memberRepository;
