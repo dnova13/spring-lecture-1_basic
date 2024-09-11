@@ -19,18 +19,42 @@ public class OrderServiceImpl implements OrderService {
     // private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
 
     // 인터페이스에만 의존하도록 아래와 같이 변경
-    private final MemberRepository memberRepository;
-    private final DiscountPolicy discountPolicy;
-    
+//    private final MemberRepository memberRepository;
+//    private final DiscountPolicy discountPolicy;
+
+
+    // 수정자 주입 예시를 위해 이전 코드 final 지움.
+    private MemberRepository memberRepository;
+    private DiscountPolicy discountPolicy;
+
     // 생성자 생성하여 의존성 주입
-    @Autowired
+ /*   @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        System.out.println("1. OrderServiceImpl.OrderServiceImpl");
         this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }*/
+
+    // 수정자 주입 예시
+    // 주입할 대상이 없어도 동작하게 하려면 (required = false) 설정
+    @Autowired(required = false)
+    public void setMemberRepository(MemberRepository memberRepository) {
+        System.out.println("memberRepository = " + memberRepository);
+        this.memberRepository = memberRepository;
+    }
+
+    // 수정자 주입 예시
+    @Autowired
+    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
+        System.out.println("DiscountPolicy = " + discountPolicy);
         this.discountPolicy = discountPolicy;
     }
 
+
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
+
+
         Member member = memberRepository.findById(memberId);
         int discountPrice = discountPolicy.discount(member, itemPrice);
 
