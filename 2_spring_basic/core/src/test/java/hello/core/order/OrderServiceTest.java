@@ -1,10 +1,8 @@
 package hello.core.order;
 
 import hello.core.AppConfig;
-import hello.core.member.Grade;
-import hello.core.member.Member;
-import hello.core.member.MemberService;
-import hello.core.member.MemberServiceImpl;
+import hello.core.discount.FixDiscountPolicy;
+import hello.core.member.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,5 +32,25 @@ public class OrderServiceTest {
         
         // basic 등급일 경우
         Assertions.assertThat(order.getDiscountPrice()).isEqualTo(0);
+    }
+
+    @Test
+    void fieldInjectionTest() {
+
+        OrderServiceImpl orderService = new OrderServiceImpl();
+
+        orderService.setMemberRepository(new MemoryMemberRepository());
+        orderService.setDiscountPolicy(new FixDiscountPolicy());
+
+
+        /*
+        *
+        * 등록한 멤버가 없어서 에러가 발생한거지 orderServiceImpl 자체 에러는 없음
+        * setter를 추가함으로써 2번의 수정자 주입과 같게 됨
+        *
+        * */
+        orderService.createOrder(1L, "itemA", 10000);
+
+
     }
 }

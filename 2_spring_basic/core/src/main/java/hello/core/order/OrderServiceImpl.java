@@ -24,16 +24,28 @@ public class OrderServiceImpl implements OrderService {
 
 
     // 수정자 주입 예시를 위해 이전 코드 final 지움.
+//    private MemberRepository memberRepository;
+//    private DiscountPolicy discountPolicy;
+    
+    // 필드 주입에 대한 예시로 인해 위의 코드 주석처리
+    @Autowired
     private MemberRepository memberRepository;
+    @Autowired
     private DiscountPolicy discountPolicy;
 
     // 생성자 생성하여 의존성 주입
- /*   @Autowired
+    /* 수정자 주입 처리 예시를 위한 주석처리
+    
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         System.out.println("1. OrderServiceImpl.OrderServiceImpl");
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }*/
+    
+    
+/*
+   // ****** 필드 주입 예시를 위한 주석처리
 
     // 수정자 주입 예시
     // 주입할 대상이 없어도 동작하게 하려면 (required = false) 설정
@@ -48,8 +60,19 @@ public class OrderServiceImpl implements OrderService {
     public void setDiscountPolicy(DiscountPolicy discountPolicy) {
         System.out.println("DiscountPolicy = " + discountPolicy);
         this.discountPolicy = discountPolicy;
+    }*/
+
+
+    // 필드 주입 설명을 위해 setter 추가
+    public void setMemberRepository(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 
+
+    // 필드 주입 설명을 위해 setter 추가
+    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
+        this.discountPolicy = discountPolicy;
+    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
