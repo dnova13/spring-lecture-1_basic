@@ -37,20 +37,20 @@ public class OrderServiceTest {
     @Test
     void fieldInjectionTest() {
 
-        OrderServiceImpl orderService = new OrderServiceImpl();
+//        OrderServiceImpl orderService = new OrderServiceImpl();
 
-        orderService.setMemberRepository(new MemoryMemberRepository());
+      /*  orderService.setMemberRepository(new MemoryMemberRepository());
         orderService.setDiscountPolicy(new FixDiscountPolicy());
 
 
-        /*
+        *//*
         *
         * 등록한 멤버가 없어서 에러가 발생한거지 orderServiceImpl 자체 에러는 없음
         * setter를 추가함으로써 2번의 수정자 주입과 같게 됨
         *
-        * */
+        * *//*
         orderService.createOrder(1L, "itemA", 10000);
-
+*/
 
     }
 }

@@ -19,8 +19,8 @@ public class OrderServiceImpl implements OrderService {
     // private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
 
     // 인터페이스에만 의존하도록 아래와 같이 변경
-//    private final MemberRepository memberRepository;
-//    private final DiscountPolicy discountPolicy;
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy;
 
 
     // 수정자 주입 예시를 위해 이전 코드 final 지움.
@@ -28,20 +28,16 @@ public class OrderServiceImpl implements OrderService {
 //    private DiscountPolicy discountPolicy;
     
     // 필드 주입에 대한 예시로 인해 위의 코드 주석처리
-    @Autowired
-    private MemberRepository memberRepository;
-    @Autowired
-    private DiscountPolicy discountPolicy;
+//    @Autowired private MemberRepository memberRepository;
+//    @Autowired private DiscountPolicy discountPolicy;
 
     // 생성자 생성하여 의존성 주입
-    /* 수정자 주입 처리 예시를 위한 주석처리
-    
     @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         System.out.println("1. OrderServiceImpl.OrderServiceImpl");
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
-    }*/
+    }
     
     
 /*
@@ -63,6 +59,8 @@ public class OrderServiceImpl implements OrderService {
     }*/
 
 
+    /* 예시용으로 더이상 안쓰니 주석처리
+    
     // 필드 주입 설명을 위해 setter 추가
     public void setMemberRepository(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
@@ -72,7 +70,7 @@ public class OrderServiceImpl implements OrderService {
     // 필드 주입 설명을 위해 setter 추가
     public void setDiscountPolicy(DiscountPolicy discountPolicy) {
         this.discountPolicy = discountPolicy;
-    }
+    }*/
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
