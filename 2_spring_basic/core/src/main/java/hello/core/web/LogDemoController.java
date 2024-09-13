@@ -20,12 +20,17 @@ public class LogDemoController {
 
     @RequestMapping("log-demo")
     @ResponseBody
-    public String logDemo(HttpServletRequest request) {
+    public String logDemo(HttpServletRequest request) throws InterruptedException {
         String requestURL = request.getRequestURL().toString();
 //        MyLogger myLogger = myLoggerProvider.getObject();
 
+
+        System.out.println("myLogger = " + myLogger.getClass());
         myLogger.setRequestURL(requestURL);
         myLogger.log("controller test");
+
+        // 정확한 테스트를 위한 스레드 설정.
+//        Thread.sleep(100);
 
         logDemoService.logic("testId");
         return "OK";
