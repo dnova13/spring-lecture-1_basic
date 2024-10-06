@@ -1,0 +1,4 @@
+diff a/3_1_spring_mvc_p1/servlet/src/main/java/hello/servlet/basic/request/RequestParamServlet.java b/3_1_spring_mvc_p1/servlet/src/main/java/hello/servlet/basic/request/RequestParamServlet.java	(rejected hunks)
+@@ -0,0 +1,2 @@
++package hello.servlet.basic.request;public class RequestParamServlet {
++}
