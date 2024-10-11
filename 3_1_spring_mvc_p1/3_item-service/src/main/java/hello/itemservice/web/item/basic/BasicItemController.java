@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.annotation.PostConstruct;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.util.List;
 
 @Controller
@@ -125,13 +127,47 @@ public class BasicItemController {
     * @ModelAttribute 자체도 생략가능하다. 대상 객체는 모델에 자동 등록된다. 나머지 사항은 기존과 동일하다.
     *
     * */
-    @PostMapping("/add")
+//    @PostMapping("/add")
     public String addItemV4(Item item) {
 
         itemRepository.save(item);
 
 //        model.addAttribute("item", item); // 자동 추가, 생략 가능
         return "basic/item";
+    }
+
+
+
+    /*
+    *
+    * 상품 등록 처리 이후에 뷰 템플릿이 아니라 상품 상세 화면으로 리다이렉트 하도록 코드를 작성해 보자.
+    * 이런 문제 해결 방식을 PRG Post/Redirect/Get라 한다.
+    *
+    * */
+//    @PostMapping("/add")
+    public String addItemV5(Item item) {
+
+        itemRepository.save(item);
+
+        return "redirect:/basic/items/" + item.getId();
+    }
+
+
+    /*
+    *
+    * 저장이 잘 되었으면 상품 상세 화면에 "저장되었습니다"라는 메시지를 보여달라는 요구사항이 왔다.
+    * 리다이렉트 할 때 간단히 status=true를 추가
+    *
+    * */
+    @PostMapping("/add")
+    public String addItemV6(Item item, RedirectAttributes redirectAttributes) {
+
+        Item savedItem = itemRepository.save(item);
+
+        redirectAttributes.addAttribute("itemId", savedItem.getId());
+        redirectAttributes.addAttribute("status", true);
+
+        return "redirect:/basic/items/{itemId}";
     }
 
 
