@@ -6,10 +6,7 @@ import hello.itemservice.domain.item.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import jakarta.annotation.PostConstruct;
 import java.util.List;
@@ -52,9 +49,106 @@ public class BasicItemController {
         return "basic/addForm";
     }
 
-    @PostMapping("/add")
+//    @PostMapping("/add")
     public String save() {
         return "basic/addForm";
+    }
+
+//    @PostMapping("/add")
+    public String save(@RequestParam String itemName,
+                       @RequestParam int price,
+                       @RequestParam Integer quantity,
+                       Model model) {
+
+        Item item = new Item();
+        item.setItemName(itemName);
+        item.setPrice(price);
+        item.setQuantity(quantity);
+
+        itemRepository.save(item);
+
+        model.addAttribute("item", item);
+
+        return "basic/item";
+    }
+
+
+    //    @PostMapping("/add")
+    public String addItemV1(@RequestParam String itemName,
+                            @RequestParam int price,
+                            @RequestParam Integer quantity,
+                            Model model) {
+
+        Item item = new Item();
+        item.setItemName(itemName);
+        item.setPrice(price);
+        item.setQuantity(quantity);
+
+        itemRepository.save(item);
+
+        model.addAttribute("item", item);
+
+        return "basic/item";
+    }
+
+//    @PostMapping("/add")
+    public String addItemV2(@ModelAttribute("item") Item item) {
+
+        itemRepository.save(item);
+
+//        model.addAttribute("item", item); // 자동 추가, 생략 가능
+
+        return "basic/item";
+    }
+
+
+    /*
+    *
+    * addItemV3 - 상품 등록 처리 - ModelAttribute 이름 생략
+    * @ModelAttribute의 이름을 생략할 수 있다.
+    *
+    * */
+//    @PostMapping("/add")
+    public String addItemV3(@ModelAttribute Item item) {
+
+        itemRepository.save(item);
+
+//        model.addAttribute("item", item); // 자동 추가, 생략 가능
+
+        return "basic/item";
+    }
+
+
+    /*
+    *
+    * addItemV4 - 상품 등록 처리 - ModelAttribute 전체 생략
+    * @ModelAttribute 자체도 생략가능하다. 대상 객체는 모델에 자동 등록된다. 나머지 사항은 기존과 동일하다.
+    *
+    * */
+    @PostMapping("/add")
+    public String addItemV4(Item item) {
+
+        itemRepository.save(item);
+
+//        model.addAttribute("item", item); // 자동 추가, 생략 가능
+        return "basic/item";
+    }
+
+
+    @GetMapping("/{itemId}/edit")
+    public String editForm(@PathVariable Long itemId, Model model) {
+        Item item = itemRepository.findById(itemId);
+        model.addAttribute("item", item);
+
+        return "basic/editForm";
+    }
+
+    @PostMapping("/{itemId}/edit")
+    public String edit(@PathVariable Long itemId, Model model) {
+        Item item = itemRepository.findById(itemId);
+        model.addAttribute("item", item);
+
+        return "basic/editForm";
     }
 
     @PostConstruct
@@ -65,4 +159,6 @@ public class BasicItemController {
 
 //        System.out.println(itemRepository);
     }
+
+
 }
