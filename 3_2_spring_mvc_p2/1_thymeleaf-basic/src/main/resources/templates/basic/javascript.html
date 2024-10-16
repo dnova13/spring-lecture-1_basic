@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<!-- 자바스크립트 인라인 사용 전 -->
+<script>
+  var username = [[${user.username}]];
+  var age = [[${user.age}]];
+
+  //자바스크립트 내추럴 템플릿
+  var username2 = /*[[${user.username}]]*/ "test username";
+
+  //객체
+  var user = [[${user}]];
+</script>
+
+<!-- 자바스크립트 인라인 사용 후 -->
+<script th:inline="javascript">
+  var username = [[${user.username}]];
+  var age = [[${user.age}]];
+
+  //자바스크립트 내추럴 템플릿
+  var username2 = /*[[${user.username}]]*/ "test username";
+
+  //객체
+  var user = [[${user}]];
+</script>
+
+<!-- 자바스크립트 인라인 each -->
+<!-- 경고 표시는 뜨지만 잘 되기는 한다 -->
+<script th:inline="javascript">
+  [# th:each="user, stat : ${users}"]
+  var user[[${stat.count}]] = [[${user}]];
+  [/]
+</script>
+
+<script th:inline="javascript">
+  var users = [];
+  /* th:each로 사용자 리스트를 배열에 추가 */
+  /* 여기서 JavaScript 배열에 user 객체를 추가하는 방식으로 바꿈 */
+  /* JSON.stringify로 자바스크립트 객체로 변환 */
+  [[${users}]].forEach(function(user, index) {
+    users.push(user);
+  });
+</script>
+
+
+
+</body>
+</html>
