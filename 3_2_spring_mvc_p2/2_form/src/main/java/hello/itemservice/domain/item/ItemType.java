@@ -9,4 +9,9 @@ public enum ItemType {
     ItemType(String description) {
         this.description = description;
     }
+
+//    addForm.html에서 프로퍼티 접근법으로 ${type.description} 사용하기 때문에 getter 추가
+    public String getDescription() {
+        return description;
+    }
 }
