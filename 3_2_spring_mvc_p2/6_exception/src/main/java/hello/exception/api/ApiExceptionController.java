@@ -16,7 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 @RestController
 public class ApiExceptionController {
 
-    @GetMapping("/api/default-hadnler-ex")
+    @GetMapping("/api/default-handler-ex")
     public String defaultException(@RequestParam Integer data) {
         return "ok";
     }
